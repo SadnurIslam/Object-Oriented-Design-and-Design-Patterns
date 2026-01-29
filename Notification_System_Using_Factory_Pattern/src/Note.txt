@@ -1,0 +1,13 @@
+Step 1: Product Interface
+->Notification
+
+Step 2: Concrete Products
+->EmailNotification
+->SMSNotification
+->PushNotification
+
+Step 3: Factory Class
+->NotificationFactory
+
+Step 4: Client Code
+->Main/Demo/Runner
