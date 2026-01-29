@@ -1,0 +1,13 @@
+Step 1: Product Interface
+->Shape
+
+Step 2: Concrete Products
+->Circle
+->Square
+->Rectangle
+
+Step 3: Factory Class
+->ShapeFactory
+
+Step 4: Client Code
+->Main/Demo/Runner
