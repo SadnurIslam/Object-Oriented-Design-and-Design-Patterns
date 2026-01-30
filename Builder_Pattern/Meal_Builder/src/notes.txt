@@ -1,0 +1,92 @@
+Step 1: Define Packing Interface
+
+interface Packing
+
+Purpose: Represents how items are packed (Wrapper, Bottle, etc.)
+
+
+
+Step 2: Implement Packing Classes
+
+class Wrapper implements Packing (Wrapper → for burgers)
+class Bottle implements Packing (Bottle → for drinks)
+
+Purpose: Concrete packing types
+
+
+
+Step 3: Define Item Interface
+
+interface Item
+
+Requires methods: name(), packing(), price()
+
+Purpose: Represents a product item in a meal
+
+
+
+
+Step 4: Create Abstract Item Types
+
+abstract class Burger implements Item (Burger → default packing is Wrapper)
+abstract class ColdDrink implements Item  (ColdDrink → default packing is Bottle)
+
+Purpose: Define categories of items with default packing
+
+
+
+
+Step 5: Create Concrete Items
+
+class VegBurger extends Burger
+class ChickenBurger extends Burger
+class Coke extends ColdDrink
+class Pepsi extends ColdDrink
+
+Each implements price() and name()
+
+Example: VegBurger → 25, packed in Wrapper
+
+Purpose: Actual products with name and price
+
+
+
+
+Step 6: Create Product Class (Meal)
+
+class Meal
+
+Purpose: Holds a list of items and calculates total cost
+
+Methods:
+addItem(Item item) → add items to the meal
+getCost() → sum of all items
+showItems() → display item info
+
+
+
+
+Step 7: Create Builder Class (MealBuilder)
+
+class MealBuilder
+
+Purpose: Builds specific combinations of products
+
+
+Methods:
+prepareVegMeal() → VegBurger + Coke
+prepareNonVegMeal() → ChickenBurger + Pepsi
+Returns a Meal object
+
+
+
+
+Step 8: Client Code
+
+public class BuilderPatternDemo
+
+Purpose: Uses Builder to construct products without worrying about details
+
+Creates MealBuilder instance
+Calls prepareVegMeal() / prepareNonVegMeal()
+Prints items and cost

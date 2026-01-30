@@ -1,0 +1,9 @@
+Product → Vehicle
+
+Concrete Items → Engine, Wheels, GPS
+
+Builder Interface → VehicleBuilder
+
+Concrete Builder → CarBuilder, TruckBuilder
+
+Director → Shop (or VehicleDirector)

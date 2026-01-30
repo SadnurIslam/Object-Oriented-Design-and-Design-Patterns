@@ -1,0 +1,5 @@
+Step 1: Product Class (House)
+
+Step 2: Builder Class  (HouseBuilder )
+
+Step 3: Client Code  (HouseBuilderDemo )
