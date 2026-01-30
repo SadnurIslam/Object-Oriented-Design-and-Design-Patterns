@@ -1,0 +1,98 @@
+Step 1: Observer Interface
+
+👉 All subscribers must implement this
+
+interface Subscriber {
+    void update(String videoTitle);
+}
+
+
+
+Step 2: Concrete Observer
+
+👉 Actual subscribers
+
+class User implements Subscriber {
+    private String name;
+
+    public User(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void update(String videoTitle) {
+        System.out.println(name + " got notification: New video uploaded -> " + videoTitle);
+    }
+}
+
+
+
+Step 3: Subject Interface
+
+👉 Defines methods to attach, detach, and notify observers
+
+interface Channel {
+    void subscribe(Subscriber sub);
+    void unsubscribe(Subscriber sub);
+    void notifySubscribers();
+}
+
+
+
+Step 4: Concrete Subject
+
+👉 YouTube Channel that notifies subscribers
+
+import java.util.ArrayList;
+import java.util.List;
+
+class YouTubeChannel implements Channel {
+    private List<Subscriber> subscribers = new ArrayList<>();
+    private String latestVideo;
+
+    @Override
+    public void subscribe(Subscriber sub) {
+        subscribers.add(sub);
+    }
+
+    @Override
+    public void unsubscribe(Subscriber sub) {
+        subscribers.remove(sub);
+    }
+
+    public void uploadVideo(String title) {
+        this.latestVideo = title;
+        notifySubscribers();
+    }
+
+    @Override
+    public void notifySubscribers() {
+        for (Subscriber sub : subscribers) {
+            sub.update(latestVideo);
+        }
+    }
+}
+
+
+
+
+Step 5: Client Code
+public class ObserverPatternDemo {
+    public static void main(String[] args) {
+        YouTubeChannel channel = new YouTubeChannel();
+
+        Subscriber user1 = new User("Alice");
+        Subscriber user2 = new User("Bob");
+        Subscriber user3 = new User("Charlie");
+
+        channel.subscribe(user1);
+        channel.subscribe(user2);
+        channel.subscribe(user3);
+
+        channel.uploadVideo("Observer Pattern Explained");
+
+        channel.unsubscribe(user2);
+
+        channel.uploadVideo("Design Patterns in Java");
+    }
+}
