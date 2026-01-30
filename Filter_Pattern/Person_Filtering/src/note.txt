@@ -1,0 +1,31 @@
+Step 1
+
+Create a class on which criteria is to be applied.
+
+public class Person
+
+
+
+
+Step 2
+
+Create an interface for Criteria.
+
+public interface Criteria
+
+
+
+
+Step 3
+
+Create concrete classes implementing the Criteria interface.
+
+public class CriteriaMale implements Criteria
+
+public class CriteriaFemale implements Criteria
+
+public class CriteriaSingle implements Criteria
+
+public class AndCriteria implements Criteria
+
+public class OrCriteria implements Criteria
