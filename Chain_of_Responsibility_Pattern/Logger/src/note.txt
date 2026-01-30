@@ -1,0 +1,17 @@
+Step 1
+
+Create an abstract logger class.
+
+public abstract class AbstractLogger
+
+
+
+Step 2
+
+Create concrete classes extending the logger.
+
+public class ConsoleLogger extends AbstractLogger
+
+public class ErrorLogger extends AbstractLogger
+
+public class FileLogger extends AbstractLogger

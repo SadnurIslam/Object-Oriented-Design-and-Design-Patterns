@@ -1,0 +1,99 @@
+Step 1: Handler Abstract Class
+
+abstract class SupportHandler {
+    protected SupportHandler nextHandler;
+
+    // Set next handler in the chain
+    public void setNextHandler(SupportHandler nextHandler) {
+        this.nextHandler = nextHandler;
+    }
+
+    // Handle the request
+    public abstract void handleRequest(SupportRequest request);
+}
+
+
+
+
+Step 2: Request Class
+
+class SupportRequest {
+    private String type;
+    private String description;
+
+    public SupportRequest(String type, String description) {
+        this.type = type;
+        this.description = description;
+    }
+
+    public String getType() { return type; }
+    public String getDescription() { return description; }
+}
+
+
+
+
+Step 3: Concrete Handlers
+
+class LevelOneSupport extends SupportHandler {
+    @Override
+    public void handleRequest(SupportRequest request) {
+        if (request.getType().equalsIgnoreCase("Simple")) {
+            System.out.println("Level 1 Support handled request: " + request.getDescription());
+        } else if (nextHandler != null) {
+            nextHandler.handleRequest(request);
+        }
+    }
+}
+
+class LevelTwoSupport extends SupportHandler {
+    @Override
+    public void handleRequest(SupportRequest request) {
+        if (request.getType().equalsIgnoreCase("Moderate")) {
+            System.out.println("Level 2 Support handled request: " + request.getDescription());
+        } else if (nextHandler != null) {
+            nextHandler.handleRequest(request);
+        }
+    }
+}
+
+class LevelThreeSupport extends SupportHandler {
+    @Override
+    public void handleRequest(SupportRequest request) {
+        if (request.getType().equalsIgnoreCase("Complex")) {
+            System.out.println("Level 3 Support handled request: " + request.getDescription());
+        } else {
+            System.out.println("Request could not be handled: " + request.getDescription());
+        }
+    }
+}
+
+
+
+
+Step 4: Client Code
+
+public class ChainOfResponsibilityDemo {
+    public static void main(String[] args) {
+        // Create handlers
+        SupportHandler level1 = new LevelOneSupport();
+        SupportHandler level2 = new LevelTwoSupport();
+        SupportHandler level3 = new LevelThreeSupport();
+
+        // Set the chain: L1 → L2 → L3
+        level1.setNextHandler(level2);
+        level2.setNextHandler(level3);
+
+        // Create requests
+        SupportRequest req1 = new SupportRequest("Simple", "Password reset");
+        SupportRequest req2 = new SupportRequest("Moderate", "Software installation issue");
+        SupportRequest req3 = new SupportRequest("Complex", "Server down");
+        SupportRequest req4 = new SupportRequest("Unknown", "Unrecognized issue");
+
+        // Send requests to the chain
+        level1.handleRequest(req1);
+        level1.handleRequest(req2);
+        level1.handleRequest(req3);
+        level1.handleRequest(req4);
+    }
+}
