@@ -1,0 +1,54 @@
+Step 1: Target Interface
+
+Purpose: The interface expected by the client
+
+// Target interface
+interface EuropeanSocket {
+    void plugIn();
+}
+
+
+
+Step 2: Adaptee Class
+
+Purpose: The class that needs adapting
+
+// Adaptee
+class USASocket {
+    public void plugInUSA() {
+        System.out.println("Plugged into USA socket (110V)");
+    }
+}
+
+
+
+Step 3: Adapter Class
+
+Purpose: Makes USASocket compatible with EuropeanSocket
+
+// Adapter
+class SocketAdapter implements EuropeanSocket {
+    private USASocket usaSocket;
+
+    public SocketAdapter(USASocket usaSocket) {
+        this.usaSocket = usaSocket;
+    }
+
+    @Override
+    public void plugIn() {
+        System.out.println("Adapter converts 110V to 220V");
+        usaSocket.plugInUSA();
+    }
+}
+
+
+
+Step 4: Client Code
+public class AdapterPatternDemo {
+    public static void main(String[] args) {
+        EuropeanSocket euroSocket = new SocketAdapter(new USASocket());
+
+        // Client expects EuropeanSocket interface
+        euroSocket.plugIn();
+    }
+}

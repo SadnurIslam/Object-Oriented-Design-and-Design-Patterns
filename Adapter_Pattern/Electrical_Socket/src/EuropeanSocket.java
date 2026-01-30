@@ -1,0 +1,3 @@
+interface EuropeanSocket {
+    void plugIn();
+}
