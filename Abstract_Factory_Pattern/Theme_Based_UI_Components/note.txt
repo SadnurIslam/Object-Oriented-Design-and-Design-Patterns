@@ -1,0 +1,102 @@
+Step 1: Abstract Products
+
+// Abstract product 1
+interface Button {
+    void render();
+}
+
+// Abstract product 2
+interface TextBox {
+    void render();
+}
+
+
+
+Step 2: Concrete Products (Light Theme)
+
+class LightButton implements Button {
+    public void render() {
+        System.out.println("Light Theme Button");
+    }
+}
+
+class LightTextBox implements TextBox {
+    public void render() {
+        System.out.println("Light Theme TextBox");
+    }
+}
+
+
+
+Step 2: Concrete Products (Dark Theme)
+
+class DarkButton implements Button {
+    public void render() {
+        System.out.println("Dark Theme Button");
+    }
+}
+
+class DarkTextBox implements TextBox {
+    public void render() {
+        System.out.println("Dark Theme TextBox");
+    }
+}
+
+
+
+
+Step 3: Abstract Factory
+
+interface ThemeFactory {
+    Button createButton();
+    TextBox createTextBox();
+}
+
+
+
+
+Step 4: Concrete Factories
+
+class LightThemeFactory implements ThemeFactory {
+
+    public Button createButton() {
+        return new LightButton();
+    }
+
+    public TextBox createTextBox() {
+        return new LightTextBox();
+    }
+}
+
+class DarkThemeFactory implements ThemeFactory {
+
+    public Button createButton() {
+        return new DarkButton();
+    }
+
+    public TextBox createTextBox() {
+        return new DarkTextBox();
+    }
+}
+
+
+
+
+Step 5: Client Code
+
+public class AbstractFactoryDemo {
+
+    public static void main(String[] args) {
+
+        ThemeFactory factory;
+
+        // Assume theme is chosen at runtime
+        factory = new DarkThemeFactory();
+
+        Button btn = factory.createButton();
+        TextBox txt = factory.createTextBox();
+
+        btn.render();
+        txt.render();
+    }
+}
