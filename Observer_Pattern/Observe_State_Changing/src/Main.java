@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,5 +14,11 @@ public class Main {
         subject.setState(15);
         System.out.println("Second state change: 10");
         subject.setState(10);
+        Scanner in = new Scanner(System.in);
+        int x = in.nextInt();
+        subject.setState(x);
+        int y = in.nextInt();
+
+        subject.setState(y);
     }
 }

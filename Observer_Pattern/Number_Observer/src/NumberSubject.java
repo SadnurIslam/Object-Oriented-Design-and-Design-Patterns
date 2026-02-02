@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 import java.util.List;
 
-class YouTubeChannel implements Subject {
+class NumberSubject implements Subject {
 
     private List<Observer> observers = new ArrayList<>();
-    private String latestVideo;
+    private int state;
 
-    public void uploadVideo(String title) {
-        this.latestVideo = title;
+    public void setState(int state) {
+        this.state = state;
         notifyObservers();
     }
 
@@ -24,7 +24,7 @@ class YouTubeChannel implements Subject {
     @Override
     public void notifyObservers() {
         for (Observer observer : observers) {
-            observer.update(latestVideo);
+            observer.update(state);
         }
     }
 }

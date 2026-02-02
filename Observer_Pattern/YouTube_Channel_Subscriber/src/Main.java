@@ -1,19 +1,20 @@
 public class Main {
     public static void main(String[] args) {
-        YouTubeChannel channel = new YouTubeChannel();
 
-        Subscriber user1 = new User("Alice");
-        Subscriber user2 = new User("Bob");
-        Subscriber user3 = new User("Charlie");
+        Subject channel = new YouTubeChannel();
 
-        channel.subscribe(user1);
-        channel.subscribe(user2);
-        channel.subscribe(user3);
+        Observer sub1 = new Subscriber("Alice");
+        Observer sub2 = new Subscriber("Bob");
+        Observer sub3 = new Subscriber("Charlie");
 
-        channel.uploadVideo("Observer Pattern Explained");
+        channel.attach(sub1);
+        channel.attach(sub2);
+        channel.attach(sub3);
 
-        channel.unsubscribe(user2);
+        ((YouTubeChannel) channel).uploadVideo("Observer Pattern Explained");
 
-        channel.uploadVideo("Design Patterns in Java");
+        channel.detach(sub2);
+
+        ((YouTubeChannel) channel).uploadVideo("Design Patterns in Java");
     }
 }
